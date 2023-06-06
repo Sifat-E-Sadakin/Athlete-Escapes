@@ -5,6 +5,7 @@ import Blogs from "../Components/Blogs";
 import SignUp from "../Components/SignUp";
 import Login from "../Components/Login";
 import PrivateRoutes from "../Providers/PrivateRoutes";
+import ErrorPage from "../Pages/ErrorPage";
 
 
 export const router = createBrowserRouter([
@@ -17,7 +18,7 @@ export const router = createBrowserRouter([
           element: <Home></Home>,
         },
         {
-          path: "/blogs",
+          path: "/blog",
           element: <PrivateRoutes><Blogs></Blogs></PrivateRoutes>,
         },
         {
@@ -30,4 +31,8 @@ export const router = createBrowserRouter([
         },
       ],
     },
+    {
+      path: '/*',
+      element: <ErrorPage></ErrorPage>
+    }
   ]);

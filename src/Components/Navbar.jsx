@@ -4,17 +4,20 @@ import { userAuth } from '../Providers/UserProvider';
 
 const Navbar = () => {
 
-    let {logOut} = useContext(userAuth)
+    let { logOut, user } = useContext(userAuth)
     let item = <>
         <li><Link to={'/'}>Home</Link></li>
-       
+        <li><Link to={'/instructors'}>Instructors</Link></li>
+        <li><Link to={'/classes'}>Classes</Link></li>
+        <li><Link to={'/dashboard'}>Dashboard</Link></li>
+
         <li><Link to={'/blogs'}>Blogs</Link></li>
-        <li><Link to={'/login'}>Login</Link></li>
+       
         <li><Link to={'/SignUp'}>Sign Up</Link></li>
         <li><button onClick={logOut}>Sign Out</button></li>
     </>
     return (
-        <div>
+        <div className='container mx-auto'>
             <div className="navbar bg-base-100">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -25,7 +28,7 @@ const Navbar = () => {
                             {item}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+                    <a className="btn btn-ghost normal-case text-xl">Athlete Escapes</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -33,7 +36,13 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    {user ?
+                        <div className="avatar online">
+                            <div className="w-14 rounded-full">
+                                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                            </div>
+                        </div> :
+                         <Link className='btn btn-primary btn-md' to={'/login'}>Login</Link>}
                 </div>
             </div>
 
