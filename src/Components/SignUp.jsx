@@ -16,7 +16,7 @@ const SignUp = () => {
         .then(userCredential=>{
             let user = userCredential.user;
             console.log(user);
-            let newUser = {name: data.name, email: user.email, role: 'student'}
+            let newUser = {name: data.name, email: user.email, photo:data.photo, role: 'student'}
             navigate('/')
             fetch('http://localhost:3000/users',{
                 method: 'POST',

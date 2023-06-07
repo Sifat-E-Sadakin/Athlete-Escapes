@@ -1,8 +1,12 @@
 import React from 'react';
 import Navbar from '../Components/Navbar';
 import { Link, Outlet } from 'react-router-dom';
+import useAdmin from '../Hooks/useAdmin';
 
 const Dashboard = () => {
+
+    let isAdmin = useAdmin();
+    console.log(isAdmin);
     return (
         <div>
             <Navbar></Navbar>

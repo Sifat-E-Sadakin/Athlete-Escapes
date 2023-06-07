@@ -11,8 +11,8 @@ const AllUsers = () => {
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            let res = await fetch('http://localhost:3000/users')
-            return res.json()
+            let res = await axiosSecure('http://localhost:3000/users')
+            return res.data
         },
     })
 

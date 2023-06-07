@@ -9,6 +9,7 @@ import HomePage from "../Pages/HomePage";
 import Dashboard from "../Pages/Dashboard";
 import AdminHome from "../Components/AdminHome";
 import AllUsers from "../Components/AllUsers";
+import Instructors from "../Pages/Instructors";
 
 
 export const router = createBrowserRouter([
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
         {
           path: "/login",
           element: <Login></Login>,
+        },
+        {
+          path: "/instructors",
+          element: <Instructors></Instructors>,
         },
       ],
     },
