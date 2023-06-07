@@ -6,6 +6,9 @@ import Login from "../Components/Login";
 import PrivateRoutes from "../Providers/PrivateRoutes";
 import ErrorPage from "../Pages/ErrorPage";
 import HomePage from "../Pages/HomePage";
+import Dashboard from "../Pages/Dashboard";
+import AdminHome from "../Components/AdminHome";
+import AllUsers from "../Components/AllUsers";
 
 
 export const router = createBrowserRouter([
@@ -30,6 +33,21 @@ export const router = createBrowserRouter([
           element: <Login></Login>,
         },
       ],
+    },
+    {
+      path: '/dashboard',
+      element: <Dashboard></Dashboard>,
+      children: [
+        {
+          path: '/dashboard/adminHome',
+          element: <AdminHome></AdminHome>
+        },
+        {
+          path: '/dashboard/allUsers',
+          element: <AllUsers></AllUsers>
+        }
+      ]
+      
     },
     {
       path: '/*',
