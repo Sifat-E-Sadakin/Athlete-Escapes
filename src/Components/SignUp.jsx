@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
 
-    let { createUser } = useContext(userAuth);
+    let { createUser, updateUser } = useContext(userAuth);
 
     let navigate = useNavigate()
 
@@ -16,6 +16,7 @@ const SignUp = () => {
         .then(userCredential=>{
             let user = userCredential.user;
             console.log(user);
+            updateUser(data.name, data.photo)
             let newUser = {name: data.name, email: user.email, photo:data.photo, role: 'student'}
             navigate('/')
             fetch('http://localhost:3000/users',{

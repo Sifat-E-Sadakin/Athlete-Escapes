@@ -9,11 +9,11 @@ const Dashboard = () => {
     let {isAdmin} = useAdmin();
     let {isInstructor} = useInstructor();
 
-    console.log(isInstructor.isInstructor);
-    console.log(isAdmin.isAdmin);
+    // console.log(isInstructor.isInstructor);
+    // console.log(isAdmin.isAdmin);
 
-    let CheckAdmin = isAdmin.isAdmin;
-    let checkInstructor = isInstructor.isInstructor; 
+    let CheckAdmin = isAdmin?.isAdmin;
+    let checkInstructor = isInstructor?.isInstructor; 
     return (
         <div className=''>
             <Navbar></Navbar>
@@ -33,13 +33,14 @@ const Dashboard = () => {
                         {/* Sidebar content here */}
                         <li><Link to={'/dashboard/adminHome'}>Admin Home</Link></li>
                         <li><Link to={'/dashboard/allUsers'}>All Users</Link></li>
+          
                   
                     </ul>:
                     checkInstructor?
                     <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
                     {/* Sidebar content here */}
                     <li><Link to={'/dashboard/adminHome'}>Instructor Home</Link></li>
-                    <li><Link to={'/dashboard/allUsers'}>All Users</Link></li>
+                    <li><Link to={'/dashboard/addClass'}>Add Class</Link></li>
                     </ul>
                     :
                     <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">

@@ -10,6 +10,7 @@ import Dashboard from "../Pages/Dashboard";
 import AdminHome from "../Components/AdminHome";
 import AllUsers from "../Components/AllUsers";
 import Instructors from "../Pages/Instructors";
+import AddClass from "../Components/AddClass";
 
 
 export const router = createBrowserRouter([
@@ -43,6 +44,7 @@ export const router = createBrowserRouter([
       path: '/dashboard',
       element: <Dashboard></Dashboard>,
       children: [
+        // admin routes
         {
           path: '/dashboard/adminHome',
           element: <AdminHome></AdminHome>
@@ -50,6 +52,12 @@ export const router = createBrowserRouter([
         {
           path: '/dashboard/allUsers',
           element: <AllUsers></AllUsers>
+        },
+
+        // instructors routes
+        {
+          path: '/dashboard/addClass',
+          element: <AddClass></AddClass>
         }
       ]
       
