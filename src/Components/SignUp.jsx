@@ -16,7 +16,17 @@ const SignUp = () => {
         .then(userCredential=>{
             let user = userCredential.user;
             console.log(user);
+            let newUser = {name: data.name, email: user.email, role: 'student'}
             navigate('/')
+            fetch('http://localhost:3000/users',{
+                method: 'POST',
+                headers: {
+                    'content-type' : 'application/json'
+                },
+                body: JSON.stringify(newUser)
+            })
+            .then(res => res.json())
+            .then(data => console.log(data))
         })
         .catch(err=>{
             console.log(err.message);
