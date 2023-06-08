@@ -33,6 +33,8 @@ const Dashboard = () => {
                         {/* Sidebar content here */}
                         <li><Link to={'/dashboard/adminHome'}>Admin Home</Link></li>
                         <li><Link to={'/dashboard/allUsers'}>All Users</Link></li>
+                        <li><Link to={'/dashboard/manageClasses'}>Manage Classes</Link></li>
+
           
                   
                     </ul>:
