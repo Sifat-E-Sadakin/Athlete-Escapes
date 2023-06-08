@@ -12,6 +12,7 @@ import AllUsers from "../Components/AllUsers";
 import Instructors from "../Pages/Instructors";
 import AddClass from "../Components/AddClass";
 import ManageClasses from "../Components/ManageClasses";
+import InstructorClasses from "../Components/Instructor/InstructorClasses";
 
 
 export const router = createBrowserRouter([
@@ -63,7 +64,11 @@ export const router = createBrowserRouter([
         {
           path: '/dashboard/addClass',
           element: <AddClass></AddClass>
-        }
+        },
+        {
+          path: '/dashboard/instructorClasses',
+          element: <InstructorClasses></InstructorClasses>
+        },
       ]
       
     },

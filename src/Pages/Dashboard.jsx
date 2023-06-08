@@ -43,6 +43,7 @@ const Dashboard = () => {
                     {/* Sidebar content here */}
                     <li><Link to={'/dashboard/adminHome'}>Instructor Home</Link></li>
                     <li><Link to={'/dashboard/addClass'}>Add Class</Link></li>
+                    <li><Link to={'/dashboard/instructorClasses'}>My Classes</Link></li>
                     </ul>
                     :
                     <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
