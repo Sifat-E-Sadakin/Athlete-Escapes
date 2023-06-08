@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
 
-    let { createUser, updateUser } = useContext(userAuth);
+    let { createUser, updateUser , googlePopUp} = useContext(userAuth);
 
     let navigate = useNavigate()
 
@@ -33,6 +33,25 @@ const SignUp = () => {
             console.log(err.message);
         })
     };
+
+    let google = ()=>{
+        googlePopUp()
+        .then(newUser=>{
+            navigate('/')
+            console.log(newUser.user.displayName);
+            let gUser = {name: newUser.user.displayName, email: newUser.user.email, photo: newUser.user.photoURL, role: 'student'}
+            fetch('http://localhost:3000/users',{
+                method: 'POST',
+                headers: {
+                    'content-type' : 'application/json'
+                },
+                body: JSON.stringify(gUser)
+            })
+            .then(res => res.json())
+            .then(data => console.log(data))
+
+        })
+    }
 
     return (
         <div>
@@ -81,7 +100,9 @@ const SignUp = () => {
                                 <input type="submit" value={'Sign Up '} className='btn btn-primary' />
                             </div>
                         </div>
+                        <button onClick={google} className='btn'>G</button>
                     </form>
+                    
                 </div>
             </div>
 

@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
-    let {signIn} = useContext(userAuth);
+    let {signIn, googlePopUp} = useContext(userAuth);
 
     let location = useLocation();
     // console.log(location);
@@ -24,6 +24,25 @@ const Login = () => {
             navigate(go)
         })
     };
+
+    let google = ()=>{
+        googlePopUp()
+        .then(newUser=>{
+            navigate('/')
+            console.log(newUser.user.displayName);
+            let gUser = {name: newUser.user.displayName, email: newUser.user.email, photo: newUser.user.photoURL, role: 'student'}
+            fetch('http://localhost:3000/users',{
+                method: 'POST',
+                headers: {
+                    'content-type' : 'application/json'
+                },
+                body: JSON.stringify(gUser)
+            })
+            .then(res => res.json())
+            .then(data => console.log(data))
+
+        })
+    }
 
     return (
         <div>
@@ -54,6 +73,7 @@ const Login = () => {
                                 <input type="submit" value={'Login'} className='btn btn-primary' />
                             </div>
                         </div>
+                        <button onClick={google}> G</button>
                     </form>
                 </div>
             </div>

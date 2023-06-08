@@ -12,7 +12,7 @@ const Navbar = () => {
         <li><Link to={'/dashboard'}>Dashboard</Link></li>
 
         <li><Link to={'/blogs'}>Blogs</Link></li>
-       
+
         <li><Link to={'/SignUp'}>Sign Up</Link></li>
         <li><button onClick={logOut}>Sign Out</button></li>
     </>
@@ -36,13 +36,16 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
+                    {user && <p className='mr-5'>Hi, <span className='font-semibold'>{user?.displayName}</span></p>}
                     {user ?
+
                         <div className="avatar online">
                             <div className="w-14 rounded-full">
-                                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+
+                                <img src={user?.photoURL} />
                             </div>
                         </div> :
-                         <Link className='btn btn-primary btn-md' to={'/login'}>Login</Link>}
+                        <Link className='btn btn-primary btn-md' to={'/login'}>Login</Link>}
                 </div>
             </div>
 

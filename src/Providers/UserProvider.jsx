@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { app } from '../Firebase/Firebase.config';
 
 export let userAuth = createContext(null)
@@ -10,6 +10,13 @@ const UserProvider = ({children}) => {
     let [loading, setLoading] = useState(true)
 
     const auth = getAuth(app);
+
+    const googleProvider = new GoogleAuthProvider();
+
+    let googlePopUp = () =>{
+        setLoading(true)
+        return signInWithPopup(auth, googleProvider)
+    }
 
     let createUser = (email, password)=>{
         setLoading(true);
@@ -26,6 +33,7 @@ const UserProvider = ({children}) => {
             setUser(getUser);
             console.log('onAuthState', getUser);
             setLoading(false)
+            console.log(loading);
 
             if(getUser){
                 fetch(`http://localhost:3000/jwt`,{
@@ -63,6 +71,8 @@ const UserProvider = ({children}) => {
         })
     }
 
+
+
     let logOut = ()=>{
         setLoading(true)
         return signOut(auth);
@@ -74,7 +84,8 @@ const UserProvider = ({children}) => {
         signIn,
         loading,
         logOut,
-        updateUser
+        updateUser,
+        googlePopUp
     }
 
 
