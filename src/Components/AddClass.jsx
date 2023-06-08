@@ -13,7 +13,7 @@ const AddClass = () => {
         console.log(data);
         let price = parseFloat(data.price)
         let seat = parseFloat(data.seats)
-        let newClass = {cName : data.cName, cImage : data.cPhoto, iName : data.iName, email : data.email , seat, price, status: data.status }
+        let newClass = {cName : data.cName, cImage : data.cPhoto, iName : data.iName, email : data.email , seat, price, status: data.status, student: 0 }
         console.log(newClass);
         let res= await axiosSecure.post('classes', newClass)
         console.log(res.data);

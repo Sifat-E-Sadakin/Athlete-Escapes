@@ -24,6 +24,7 @@ const InstructorClasses = () => {
                     {/* head */}
                     <thead>
                         <tr>
+                            <th>Class Name</th>
                             <th>Status</th>
                             <th>Feedback</th>
                             <th>Enrolled Student</th>
@@ -34,6 +35,7 @@ const InstructorClasses = () => {
                         {/* row 1 */}
                        {
                         instructorClasses.map(item=> <tr>
+                            <th>{item.cName}</th>
                             <th>{item.status}</th>
                             <td>{item.feedback? item.feedback: 'OK'}</td>
                             <td>0</td>
