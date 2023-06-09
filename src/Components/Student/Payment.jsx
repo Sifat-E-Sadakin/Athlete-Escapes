@@ -7,7 +7,7 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { userAuth } from '../../Providers/UserProvider';
 
-const stripePromise = loadStripe('pk_test_51NF9F3AeyKVLGcRPBhWe6OHkhCxZkVKQLdCbgkbRLuZ4BfMtopLZE8nOZmT8zH3XZP8mzQebKe4mccIbdvsxOZ0000JZcxLRgv');
+const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT);
 
 const Payment = () => {
 
