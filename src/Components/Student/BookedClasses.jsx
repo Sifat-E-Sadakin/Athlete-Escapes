@@ -8,8 +8,9 @@ const BookedClasses = () => {
 
     let { user } = useContext(userAuth)
     let [axiosSecure] = useAxiosSecure()
-    let { data: bookedClasses = [], refetch } = useQuery({
+    let { data: bookedClasses = [], refetch, } = useQuery({
         queryKey: ['bc'],
+        
         queryFn: async () => {
             let res = await axiosSecure(`/bookedClasses?email=${user?.email}`)
             return res.data
@@ -51,21 +52,21 @@ const BookedClasses = () => {
                     </thead>
                     <tbody>
 
-                        {
-                            bookedClasses.map((item, index) => <tr>
+                        { 
+                            bookedClasses?.map((item, index) => <tr>
                                 <th>{index + 1}</th>
                                 <td>{item.cName}</td>
                                 <td>{item.iName}</td>
                                 <td>{item.price}</td>
                                 <td> <button onClick={() => remove(item._id)} className="btn btn-ghost btn-xs">Remove</button></td>
-
+                                <Link to={`/dashboard/payment/${item._id}`}><button className="btn btn-ghost btn-xs">Pay</button></Link>
                             </tr>)
                         }
 
 
                     </tbody>
                 </table>
-                <Link to={'/dashboard/payment'}><button className="btn btn-primary btn-md">Pay</button></Link>
+                {/* <Link to={'/dashboard/payment'}><button className="btn btn-primary btn-md">Pay</button></Link> */}
             </div>
 
 

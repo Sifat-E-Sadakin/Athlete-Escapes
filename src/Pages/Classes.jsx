@@ -80,7 +80,7 @@ const Classes = () => {
                                         <p>Available Seats : {item.seat}</p>
                                         <p>Fee : {item.price}</p>
 
-                                        {!isAdmin.isAdmin && !isInstructor.isInstructor ?
+                                        {!isAdmin?.isAdmin && !isInstructor?.isInstructor ?
                                             <div className="card-actions justify-end">
                                                 {user ?
 
@@ -110,7 +110,7 @@ const Classes = () => {
                                         <p>Available Seats : {item.seat}</p>
                                         <p>Fee : {item.price}</p>
 
-                                        {!isAdmin.isAdmin && !isInstructor.isInstructor ?
+                                        {!isAdmin?.isAdmin && !isInstructor?.isInstructor ?
                                             <div className="card-actions justify-end">
                                                 {user ?
 

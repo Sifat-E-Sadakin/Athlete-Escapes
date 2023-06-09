@@ -6,6 +6,7 @@ import CheckOut from './CheckOut.Jsx';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { userAuth } from '../../Providers/UserProvider';
+import { useParams } from 'react-router-dom';
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT);
 
@@ -13,25 +14,37 @@ const Payment = () => {
 
     let { user } = useContext(userAuth)
     let [axiosSecure] = useAxiosSecure()
-    let { data: bookedClasses = [] } = useQuery({
+
+    let getId = useParams()
+    let id = getId.id
+
+    console.log(id);
+    let { data: bookedClassesPaid = [] } = useQuery({
         queryKey: ['bc'],
         queryFn: async () => {
-            let res = await axiosSecure(`/bookedClasses?email=${user?.email}`)
+            let res = await axiosSecure(`/bookedClassesForPayment/${id}?email=${user?.email}`)
             return res.data
         }
     })
-    console.log(bookedClasses);
+    console.log(bookedClassesPaid);
     let totalPrice;
-    if(bookedClasses){
-       totalPrice= bookedClasses.reduce((sum, item)=> sum+ item.price, 0);
+    let fId;
+    if(bookedClassesPaid){
+       totalPrice= bookedClassesPaid.price
        console.log(totalPrice);
+       fId = bookedClassesPaid.fId
+       console.log(fId);
     } 
+ 
+   
+   
+    
 
     return (
         <div>
             payment
             <Elements stripe={stripePromise}>
-               <CheckOut fees={totalPrice}></CheckOut>
+               <CheckOut fId={fId} bookedClasses={bookedClassesPaid} id={id} fees={totalPrice}></CheckOut>
             </Elements>
 
         </div>

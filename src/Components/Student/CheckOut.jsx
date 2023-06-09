@@ -3,7 +3,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { userAuth } from '../../Providers/UserProvider';
 
-const CheckOut = ({fees}) => {
+const CheckOut = ({fees, id, bookedClasses, fId}) => {
+
+  console.log(fees);
 
     const stripe = useStripe();
     let {user} = useContext(userAuth)
@@ -19,7 +21,7 @@ const CheckOut = ({fees}) => {
             setClientSecret(data.data.clientSecret)
 
           }) 
-      }, []);
+      }, [fees]);
   
     const handleSubmit = async (event) => {
       // Block native form submission.
@@ -70,12 +72,13 @@ const CheckOut = ({fees}) => {
         console.log(err);
       }
       if(paymentIntent){
-        let getBookedClasses= await   axiosSecure(`/bookedClasses?email=${user.email}`)
+        // let getBookedClasses= await   axiosSecure(`/bookedClasses?email=${user.email}`)
 
-        let bookedClasses =  getBookedClasses.data;
+        // let bookedClasses =  getBookedClasses.data;
 
-        console.log(bookedClasses);
-        bookedClasses.map(item => axiosSecure.patch(`/addClass/${item.fId}`))
+        // console.log(bookedClasses);
+       axiosSecure.patch(`/addClass/${fId}`)
+
 
         axiosSecure.post('/confirmedClasses', bookedClasses)
         .then(res=>{
@@ -83,7 +86,7 @@ const CheckOut = ({fees}) => {
 
         })
 
-        axiosSecure.delete(`/bookedClasses?email=${user.email}`)
+        axiosSecure.delete(`/bookedClasses/${id}?email=${user.email}`)
         .then(res=>{
             console.log(res.data);
         })
