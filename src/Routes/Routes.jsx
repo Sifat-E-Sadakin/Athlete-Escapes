@@ -17,6 +17,8 @@ import AdminHome from "../Components/Admin/AdminHome";
 import InstructorsHome from "../Components/Instructor/InstructorsHome";
 import StudentHome from "../Components/Student/StudentHome";
 import BookedClasses from "../Components/Student/BookedClasses";
+import Payment from "../Components/Student/Payment";
+
 
 
 export const router = createBrowserRouter([
@@ -91,6 +93,10 @@ export const router = createBrowserRouter([
         {
           path: '/dashboard/bookedClasses',
           element: <BookedClasses></BookedClasses>
+        },
+        {
+          path: '/dashboard/payment',
+          element: <Payment></Payment>
         }
       ]
       
