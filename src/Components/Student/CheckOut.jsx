@@ -9,6 +9,7 @@ const CheckOut = ({fees}) => {
     let {user} = useContext(userAuth)
     let [axiosSecure] =useAxiosSecure()
     const elements = useElements();
+    let [confirmedClasses, setConfirmedClasses] = useState()
     const [clientSecret, setClientSecret] = useState("");
     // console.log(fees);
     useEffect(() => {
@@ -68,7 +69,25 @@ const CheckOut = ({fees}) => {
       if(err){
         console.log(err);
       }
-      console.log(paymentIntent);
+      if(paymentIntent){
+        let getBookedClasses= await   axiosSecure(`/bookedClasses?email=${user.email}`)
+
+        let bookedClasses =  getBookedClasses.data;
+
+        console.log(bookedClasses);
+        bookedClasses.map(item => axiosSecure.patch(`/addClass/${item.fId}`))
+
+        axiosSecure.post('/confirmedClasses', bookedClasses)
+        .then(res=>{
+            console.log(res.data);
+
+        })
+
+        axiosSecure.delete(`/bookedClasses?email=${user.email}`)
+        .then(res=>{
+            console.log(res.data);
+        })
+      }
     };
 
     return (

@@ -19,13 +19,13 @@ const Classes = () => {
     //  console.log(approvedClasses);
 
     let addClass = info =>{
-        axiosSecure.patch(`/addClass/${info._id}`)
-        .then(data=>{
-            refetch()
-            console.log(data.data);
+        // axiosSecure.patch(`/addClass/${info._id}`)
+        // .then(data=>{
+        //     refetch()
+        //     console.log(data.data);
 
-        })
-        let studentClass = {cName: info.cName, iName: info.iName, price : info.price, email : user?.email}
+        // })
+        let studentClass = {fId: info._id, cName: info.cName, iName: info.iName, price : info.price, email : user?.email}
         console.log(studentClass);
         axiosSecure.post('/addClass', studentClass)
         .then(data=>{

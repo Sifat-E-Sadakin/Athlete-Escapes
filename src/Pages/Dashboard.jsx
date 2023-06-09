@@ -49,7 +49,8 @@ const Dashboard = () => {
                     <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
                         {/* Sidebar content here */}
                         <li><Link to={'/dashboard/studentHome'}>Home</Link></li>
-                        <li><Link to={'/dashboard/BookedClasses'}>Booked Classes</Link></li>
+                        <li><Link to={'/dashboard/bookedClasses'}>Booked Classes</Link></li>
+                        <li><Link to={'/dashboard/confirmedClasses'}>Confirmed Classes</Link></li>
                         
                     </ul>
                     }
