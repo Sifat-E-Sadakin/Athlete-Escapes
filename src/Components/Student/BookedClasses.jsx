@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { userAuth } from '../../Providers/UserProvider';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import { Link } from 'react-router-dom';
 
 const BookedClasses = () => {
 
@@ -55,7 +56,7 @@ const BookedClasses = () => {
 
                     </tbody>
                 </table>
-                <td> <button className="btn btn-primary btn-md">Pay</button></td>
+                 <Link to={'/dashboard/payment'}><button className="btn btn-primary btn-md">Pay</button></Link>
             </div>
 
 
