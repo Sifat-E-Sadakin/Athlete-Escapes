@@ -4,7 +4,6 @@ const AdminHome = () => {
     return (
         <div>
             home of admin
-            
         </div>
     );
 };

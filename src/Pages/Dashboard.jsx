@@ -41,15 +41,16 @@ const Dashboard = () => {
                     checkInstructor?
                     <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
                     {/* Sidebar content here */}
-                    <li><Link to={'/dashboard/adminHome'}>Instructor Home</Link></li>
+                    <li><Link to={'/dashboard/instructorHome'}>Instructor Home</Link></li>
                     <li><Link to={'/dashboard/addClass'}>Add Class</Link></li>
                     <li><Link to={'/dashboard/instructorClasses'}>My Classes</Link></li>
                     </ul>
                     :
                     <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
                         {/* Sidebar content here */}
-                        <li><Link to={'/dashboard/adminHome'}>Home</Link></li>
-                        <li><Link to={'/dashboard/allUsers'}>All Users</Link></li>
+                        <li><Link to={'/dashboard/studentHome'}>Home</Link></li>
+                        <li><Link to={'/dashboard/BookedClasses'}>Booked Classes</Link></li>
+                        
                     </ul>
                     }
 

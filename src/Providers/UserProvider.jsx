@@ -47,7 +47,7 @@ const UserProvider = ({children}) => {
             .then(data =>{
                 console.log(data);
                 localStorage.setItem('WT', data.token)
-               
+               setLoading(false)
             })
             }
             else{
