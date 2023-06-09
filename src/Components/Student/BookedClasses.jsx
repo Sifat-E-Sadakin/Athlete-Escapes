@@ -8,7 +8,7 @@ const BookedClasses = () => {
 
     let { user } = useContext(userAuth)
     let [axiosSecure] = useAxiosSecure()
-    let { data: bookedClasses = [] } = useQuery({
+    let { data: bookedClasses = [], refetch } = useQuery({
         queryKey: ['bc'],
         queryFn: async () => {
             let res = await axiosSecure(`/bookedClasses?email=${user?.email}`)
@@ -17,10 +17,19 @@ const BookedClasses = () => {
     })
     console.log(bookedClasses);
     let totalPrice;
-    if(bookedClasses){
-       totalPrice= bookedClasses.reduce((sum, item)=> sum+ item.price, 0);
-       console.log(totalPrice);
-    } 
+    if (bookedClasses) {
+        totalPrice = bookedClasses.reduce((sum, item) => sum + item.price, 0);
+        console.log(totalPrice);
+    }
+
+    let remove = async id => {
+       await axiosSecure.delete(`/bookedClasses/${id}?email=${user.email}`)
+            .then(data => {
+                refetch()
+                console.log(data.data);
+            })
+
+    }
     return (
         <div>
             Booked Class
@@ -37,26 +46,26 @@ const BookedClasses = () => {
                             <th>Instructor Name</th>
                             <th>Fee</th>
                             <th>Remove</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
 
                         {
                             bookedClasses.map((item, index) => <tr>
-                                <th>{index+1}</th>
+                                <th>{index + 1}</th>
                                 <td>{item.cName}</td>
                                 <td>{item.iName}</td>
                                 <td>{item.price}</td>
-                                <td> <button className="btn btn-ghost btn-xs">Remove</button></td>
-                               
+                                <td> <button onClick={() => remove(item._id)} className="btn btn-ghost btn-xs">Remove</button></td>
+
                             </tr>)
                         }
 
 
                     </tbody>
                 </table>
-                 <Link to={'/dashboard/payment'}><button className="btn btn-primary btn-md">Pay</button></Link>
+                <Link to={'/dashboard/payment'}><button className="btn btn-primary btn-md">Pay</button></Link>
             </div>
 
 

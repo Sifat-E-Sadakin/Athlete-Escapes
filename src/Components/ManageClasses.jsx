@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 const ManageClasses = () => {
 
     let [axiosSecure] = useAxiosSecure();
+ 
+    const [disabledButtons, setDisabledButtons] = useState([]);
 
     let { data: classes = [], refetch } = useQuery({
         queryKey: ['classes'],
@@ -21,14 +23,26 @@ const ManageClasses = () => {
             .then(data => {
                 refetch()
                 console.log(data);
+                disabledButtons.push(id)
+
+               
             })
+
+          
+            
     }
+    
+    const isButtonDisabled = (buttonId) => {
+        return disabledButtons.includes(buttonId);
+      };
+    
 
     let denied = (id) => {
         axiosSecure.put(`/classes/deny/${id}`)
             .then(data => {
                 refetch()
                 console.log(data);
+                disabledButtons.push(id)
             })
     }
     let deniedID;
@@ -95,9 +109,9 @@ const ManageClasses = () => {
                                 <td>{item.price}</td>
                                 <td>{item.status}</td>
                                 <th>
-                                    <button onClick={() => approve(item._id)} className="btn btn-ghost btn-xs">Approve</button>
-                                    <button onClick={() => denied(item._id)} className="btn btn-ghost btn-xs">Deny</button>
-                                    <button onClick={()=>feedback(item._id)}><button onClick={() => window.my_modal_5.showModal(item._id)} className="btn btn-ghost btn-xs">Send Feedback</button></button>
+                                    <button  disabled={isButtonDisabled(item._id)} onClick={() => approve(item._id)} className="btn btn-ghost btn-xs">Approve</button>
+                                    <button disabled={isButtonDisabled(item._id)}  onClick={() => denied(item._id)} className="btn btn-ghost btn-xs">Deny</button>
+                                    <button disabled={isButtonDisabled(item._id)} onClick={()=>feedback(item._id)}><button onClick={() => window.my_modal_5.showModal(item._id)} className="btn btn-ghost btn-xs">Send Feedback</button></button>
                                 </th>
                             </tr>
 

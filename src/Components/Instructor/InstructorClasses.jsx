@@ -38,8 +38,8 @@ const InstructorClasses = () => {
                             <th>{item.cName}</th>
                             <th>{item.status}</th>
                             <td>{item.feedback? item.feedback: 'OK'}</td>
-                            <td>0</td>
-                            <td><button>Update</button></td>
+                            <td>{item.student}</td>
+                            <td className='btn btn-ghost btn-xs'><button>Update</button></td>
                         </tr>)
                        }
                   

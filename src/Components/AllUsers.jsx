@@ -1,12 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { data } from 'autoprefixer';
 
+let disabledButtons=[]
+
 const AllUsers = () => {
 
     let [axiosSecure] = useAxiosSecure()
+    
 
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
@@ -16,11 +19,19 @@ const AllUsers = () => {
         },
     })
 
+    const isButtonDisabled = (buttonId) => {
+        return disabledButtons.includes(buttonId);
+      };
+
     let setAdmin = id =>{
         axiosSecure.put(`/users/a/${id}`)
         .then(data=>{
             console.log(data);
             refetch();
+            disabledButtons.push(id+'a')
+            let newArr = disabledButtons.filter(item=> item != id+'b' && item != id+'c')
+            console.log(newArr);
+            disabledButtons = [...newArr]
         })
     }
     let setInstructor = id =>{
@@ -28,6 +39,10 @@ const AllUsers = () => {
         .then(data=>{
             console.log(data);
             refetch();
+            disabledButtons.push(id+'b')
+            let newArr = disabledButtons.filter(item=> item != id+'a' && item !=  id+'c')
+            console.log(newArr);
+            disabledButtons = [...newArr]
         })
     }
     let setStudent = id =>{
@@ -35,8 +50,14 @@ const AllUsers = () => {
         .then(data=>{
             console.log(data);
             refetch();
+            disabledButtons.push(id+'c')
+            let newArr = disabledButtons.filter(item=> item != id+'a' && item !=  id+'b')
+            console.log(newArr);
+            disabledButtons = [...newArr]
         })
     }
+
+    console.log(disabledButtons);
 
   
 
@@ -66,9 +87,9 @@ const AllUsers = () => {
                                     <td>{user.email}</td>
                                     <td>{user.role}</td>
                                     <td className='space-x-2'>
-                                        <button onClick={()=>setAdmin(user._id)}>To admin</button>
-                                        <button onClick={()=>setInstructor(user._id)}>To instructor</button>
-                                        <button onClick={()=>setStudent(user._id)}>To student</button>
+                                        <button disabled={isButtonDisabled(user._id+'a')} className="btn btn-ghost btn-xs"  onClick={()=>setAdmin(user._id)}>To admin</button>
+                                        <button disabled={isButtonDisabled(user._id+'b')} className="btn btn-ghost btn-xs"  onClick={()=>setInstructor(user._id)}>To instructor</button>
+                                        <button disabled={isButtonDisabled(user._id+'c')} className="btn btn-ghost btn-xs"  onClick={()=>setStudent(user._id)}>To student</button>
                                     </td>
                                     
                                    
