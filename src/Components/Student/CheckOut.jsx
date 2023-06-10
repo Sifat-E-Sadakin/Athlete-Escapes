@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { userAuth } from '../../Providers/UserProvider';
 import moment from 'moment/moment';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const CheckOut = ({ fees, id, bookedClasses, fId }) => {
 
@@ -14,6 +15,7 @@ const CheckOut = ({ fees, id, bookedClasses, fId }) => {
   const elements = useElements();
   let [confirmedClasses, setConfirmedClasses] = useState()
   const [clientSecret, setClientSecret] = useState("");
+  let go = useNavigate();
   // console.log(fees);
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -80,7 +82,7 @@ const CheckOut = ({ fees, id, bookedClasses, fId }) => {
       // console.log(bookedClasses);
       console.log(paymentIntent);
 
-      let paymentHistory = {email : user.email , time: moment().format(), cName: bookedClasses.cName, iName: bookedClasses.iName, price: bookedClasses.price, status: paymentIntent.status, txId: paymentIntent.id, Brand: paymentMethod.card.brand, payment_method: paymentIntent.payment_method_types[0] }
+      let paymentHistory = { email: user.email, time: moment().format(), cName: bookedClasses.cName, iName: bookedClasses.iName, price: bookedClasses.price, status: paymentIntent.status, txId: paymentIntent.id, Brand: paymentMethod.card.brand, payment_method: paymentIntent.payment_method_types[0] }
       console.log(paymentHistory);
 
 
@@ -97,7 +99,10 @@ const CheckOut = ({ fees, id, bookedClasses, fId }) => {
       axiosSecure.delete(`/bookedClasses/${id}?email=${user.email}`)
         .then(res => {
           console.log(res.data);
+
         })
+      // go('/')
+
     }
   };
 

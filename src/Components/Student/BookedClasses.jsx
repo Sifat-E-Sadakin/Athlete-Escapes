@@ -3,16 +3,21 @@ import React, { useContext } from 'react';
 import { userAuth } from '../../Providers/UserProvider';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const BookedClasses = () => {
 
-    let { user } = useContext(userAuth)
+    let { user, loading } = useContext(userAuth)
     let [axiosSecure] = useAxiosSecure()
-    let { data: bookedClasses = [], } = useQuery({
+
+    let [bookedClasses, setBookedClasses] = useState([])
+    let { data: getData=[],  refetch } = useQuery({
         queryKey: ['bc'],
-        
+        enabled: !loading,
         queryFn: async () => {
             let res = await axiosSecure(`/bookedClasses?email=${user?.email}`)
+            setBookedClasses(res.data)
             return res.data
         }
     })
@@ -22,7 +27,7 @@ const BookedClasses = () => {
     // //     totalPrice = bookedClasses.reduce((sum, item) => sum + item.price, 0);
     // //     console.log(totalPrice);
     // // }
-
+   
     let remove = async id => {
        await axiosSecure.delete(`/bookedClasses/${id}?email=${user.email}`)
             .then(data => {
@@ -31,8 +36,14 @@ const BookedClasses = () => {
             })
 
     }
+    // window.location.reload();
+
+    // useEffect(()=>{
+    //    
+    // },[])
     return (
         <div>
+            
             Booked Class
 
             <p>Total Fees : {totalPrice} </p>
@@ -53,7 +64,7 @@ const BookedClasses = () => {
                     <tbody>
 
                         { 
-                            bookedClasses?.map((item, index) => <tr>
+                            bookedClasses.map((item, index) => <tr>
                                 <th>{index + 1}</th>
                                 <td>{item.cName}</td>
                                 <td>{item.iName}</td>
