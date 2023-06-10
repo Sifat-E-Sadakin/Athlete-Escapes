@@ -5,7 +5,7 @@ import useAxiosSecure from '../Hooks/useAxiosSecure';
 const ManageClasses = () => {
 
     let [axiosSecure] = useAxiosSecure();
- 
+
     const [disabledButtons, setDisabledButtons] = useState([]);
 
     let { data: classes = [], refetch } = useQuery({
@@ -25,17 +25,17 @@ const ManageClasses = () => {
                 console.log(data);
                 disabledButtons.push(id)
 
-               
+
             })
 
-          
-            
+
+
     }
-    
+
     const isButtonDisabled = (buttonId) => {
         return disabledButtons.includes(buttonId);
-      };
-    
+    };
+
 
     let denied = (id) => {
         axiosSecure.put(`/classes/deny/${id}`)
@@ -47,19 +47,19 @@ const ManageClasses = () => {
     }
     let deniedID;
     let feedback = (id) => {
-      deniedID = id
+        deniedID = id
     }
 
-    let sendFeedback = ()=>{
+    let sendFeedback = () => {
         let id = deniedID;
         console.log(id);
         let feedback = document.getElementById('feedback').value
-        let finalFeedback = {feedback}
+        let finalFeedback = { feedback }
         console.log(finalFeedback);
         axiosSecure.put(`/classes/feedback/${id}`, finalFeedback)
-        .then(data=> {
-            console.log(data.data);
-        })
+            .then(data => {
+                console.log(data.data);
+            })
     }
 
 
@@ -96,9 +96,10 @@ const ManageClasses = () => {
                                     {index + 1}
                                 </th>
                                 <td>
-                                    <div className="flex items-center space-x-3">
-                                        <img src={item.cImage} alt="" />
-
+                                    <div className="avatar">
+                                        <div className="w-24 rounded">
+                                            <img src={item.cImage} />
+                                        </div>
                                     </div>
                                 </td>
                                 <td>
@@ -111,9 +112,9 @@ const ManageClasses = () => {
                                 <td>{item.price}</td>
                                 <td>{item.status}</td>
                                 <th>
-                                    <button  disabled={isButtonDisabled(item._id)} onClick={() => approve(item._id)} className="btn btn-ghost btn-xs">Approve</button>
-                                    <button disabled={isButtonDisabled(item._id)}  onClick={() => denied(item._id)} className="btn btn-ghost btn-xs">Deny</button>
-                                    <button disabled={isButtonDisabled(item._id)} onClick={()=>feedback(item._id)}><button onClick={() => window.my_modal_5.showModal(item._id)} className="btn btn-ghost btn-xs">Send Feedback</button></button>
+                                    <button disabled={isButtonDisabled(item._id)} onClick={() => approve(item._id)} className="btn btn-ghost btn-xs">Approve</button>
+                                    <button disabled={isButtonDisabled(item._id)} onClick={() => denied(item._id)} className="btn btn-ghost btn-xs">Deny</button>
+                                    <button disabled={isButtonDisabled(item._id)} onClick={() => feedback(item._id)}><button onClick={() => window.my_modal_5.showModal(item._id)} className="btn btn-ghost btn-xs">Send Feedback</button></button>
                                 </th>
                             </tr>
 
@@ -123,11 +124,11 @@ const ManageClasses = () => {
                             <form method="dialog" className="modal-box">
                                 <h3 className="font-bold text-lg">Feedback</h3>
                                 <p className="py-4">
-                                <textarea id='feedback' placeholder="Reason of rejection" className="textarea textarea-bordered textarea-lg w-full max-w-xs" ></textarea>
+                                    <textarea id='feedback' placeholder="Reason of rejection" className="textarea textarea-bordered textarea-lg w-full max-w-xs" ></textarea>
                                 </p>
                                 <div className="modal-action">
                                     {/* if there is a button in form, it will close the modal */}
-                                    <button onClick={()=>sendFeedback()} className="btn">Send</button>
+                                    <button onClick={() => sendFeedback()} className="btn">Send</button>
                                 </div>
                             </form>
                         </dialog>

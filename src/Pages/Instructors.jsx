@@ -23,7 +23,7 @@ const Instructors = () => {
             <div className='grid md:grid-cols-3'>
                 {
                     instructors.map(instructor =>
-                        <div key={instructor._id} className="card card-side w-96 bg-base-100 shadow-xl">
+                        <div key={instructor._id} className="card card-side w-96 bg-base-100 shadow-xl my-5">
                             <figure><img src={instructor.photo} alt="Movie" /></figure>
                             <div className="card-body">
                                 <h2 className="card-title">{instructor.name}</h2>

@@ -29,8 +29,8 @@ const PopularInstructors = () => {
                <Marquee>
                {
                     topSix.map(item =>
-                        <div className="carousel carousel-end rounded-box">
-                            <div className="carousel-item w-72">
+                        <div className="carousel carousel-end ">
+                            <div className="carousel-item w-64 max-w-[256px]">
                                 <img src={item.iImage} alt="Drink" />
                             </div>
                             

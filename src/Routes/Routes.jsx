@@ -23,6 +23,7 @@ import PaymentHistory from "../Components/Student/PaymentHistory";
 import AllPayments from "../Components/Admin/AllPayments";
 import AdminRoutes from "./AdminRoutes";
 import InstructorsRoutes from "./InstructorsRoutes";
+import NotFound from "../Components/NotFound";
 
 
 
@@ -120,6 +121,6 @@ export const router = createBrowserRouter([
     },
     {
       path: '/*',
-      element: <ErrorPage></ErrorPage>
+      element: <NotFound></NotFound>
     }
   ]);

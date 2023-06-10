@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { userAuth } from '../Providers/UserProvider';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 
 const PopularClasses = () => {
 
@@ -33,7 +34,7 @@ const PopularClasses = () => {
                       <h2 className="card-title">{item.cName}</h2>
                       <p>{item.iName}</p>
                       <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
+                      <Link to={'/classes'}><button  className="btn btn-primary">Buy Now</button></Link>
                       </div>
                     </div>
                   </div>
