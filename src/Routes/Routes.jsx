@@ -20,6 +20,9 @@ import BookedClasses from "../Components/Student/BookedClasses";
 import Payment from "../Components/Student/Payment";
 import ConfirmedClasses from "../Components/Student/ConfirmedClasses";
 import PaymentHistory from "../Components/Student/PaymentHistory";
+import AllPayments from "../Components/Admin/AllPayments";
+import AdminRoutes from "./AdminRoutes";
+import InstructorsRoutes from "./InstructorsRoutes";
 
 
 
@@ -61,15 +64,19 @@ export const router = createBrowserRouter([
         // admin routes
         {
           path: '/dashboard/adminHome',
-          element: <AdminHome></AdminHome>
+          element: <AdminRoutes></AdminRoutes>
         },
         {
           path: '/dashboard/allUsers',
-          element: <AllUsers></AllUsers>
+          element: <AdminRoutes><AllUsers></AllUsers></AdminRoutes>
         },
         {
           path: '/dashboard/manageClasses',
-          element: <ManageClasses></ManageClasses>
+          element: <AdminRoutes><ManageClasses></ManageClasses></AdminRoutes>
+        },
+        {
+          path: '/dashboard/allPayments',
+          element: <AdminRoutes><AllPayments></AllPayments></AdminRoutes>
         },
 
         // instructors routes
@@ -79,11 +86,11 @@ export const router = createBrowserRouter([
         },
         {
           path: '/dashboard/addClass',
-          element: <AddClass></AddClass>
+          element:<InstructorsRoutes> <AddClass></AddClass></InstructorsRoutes>
         },
         {
           path: '/dashboard/instructorClasses',
-          element: <InstructorClasses></InstructorClasses>
+          element:<InstructorsRoutes> <InstructorClasses></InstructorClasses></InstructorsRoutes>
         },
 
         // student routes /////////////////////////////////////////////////

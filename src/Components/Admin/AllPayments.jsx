@@ -3,14 +3,16 @@ import React, { useContext } from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { userAuth } from '../../Providers/UserProvider';
 
-const PaymentHistory = () => {
+const AllPayments = () => {
+
+
 
     let [axiosSecure] = useAxiosSecure()
     let { user } = useContext(userAuth)
     let { data: paymentHistory = [] } = useQuery({
         queryKey: (['ph']),
         queryFn: async () => {
-            let res = await axiosSecure(`/paymentHistory?email=${user.email}`)
+            let res = await axiosSecure(`/allPaymentHistory`)
             return res.data
         }
 
@@ -29,6 +31,7 @@ const PaymentHistory = () => {
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Student Email</th>
                             <th>Class Name</th>
                             {/* <th>Instructor Name</th> */}
                             <th>Fee</th>
@@ -46,6 +49,7 @@ const PaymentHistory = () => {
                         {
                             paymentHistory?.map((item, index) => <tr>
                                 <th>{index + 1}</th>
+                                <th>{item.email}</th>
                                 <td>{item.cName}</td>
                                 {/* <td>{item.iName}</td> */}
                                 <td>{item.price}</td>
@@ -54,8 +58,8 @@ const PaymentHistory = () => {
                                 <td>{item.status}</td>
                                 <td>{item.txId}</td>
                                 <td>{item.time}</td>
-                           
-                            
+
+
                             </tr>)
                         }
 
@@ -69,4 +73,4 @@ const PaymentHistory = () => {
     );
 };
 
-export default PaymentHistory;
+export default AllPayments;

@@ -34,6 +34,7 @@ const Dashboard = () => {
                         <li><Link to={'/dashboard/adminHome'}>Admin Home</Link></li>
                         <li><Link to={'/dashboard/allUsers'}>All Users</Link></li>
                         <li><Link to={'/dashboard/manageClasses'}>Manage Classes</Link></li>
+                        <li><Link to={'/dashboard/allPayments'}>ALL Payments</Link></li>
 
           
                   

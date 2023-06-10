@@ -80,6 +80,7 @@ const ManageClasses = () => {
                             <th>Instructor Name</th>
                             <th>Instructor Email</th>
                             <th>Available Seats</th>
+                            <th>Student</th>
                             <th>Price</th>
                             <th>Status</th>
                             <th>Change Status</th>
@@ -106,6 +107,7 @@ const ManageClasses = () => {
                                 <td>{item.iName}</td>
                                 <td>{item.email}</td>
                                 <td>{item.seat}</td>
+                                <td>{item.student}</td>
                                 <td>{item.price}</td>
                                 <td>{item.status}</td>
                                 <th>

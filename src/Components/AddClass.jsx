@@ -13,7 +13,7 @@ const AddClass = () => {
         console.log(data);
         let price = parseFloat(data.price)
         let seat = parseFloat(data.seats)
-        let newClass = {cName : data.cName, cImage : data.cPhoto, iName : data.iName, email : data.email , seat, price, status: data.status, student: 0 }
+        let newClass = {cName : data.cName,iImage: data.iPhoto, cImage : data.cPhoto, iName : data.iName, email : data.email , seat, price, status: data.status, student: 0 }
         console.log(newClass);
         let res= await axiosSecure.post('classes', newClass)
         console.log(res.data);
@@ -123,6 +123,20 @@ const AddClass = () => {
                             required
                             defaultValue={3}
                             placeholder='Available Quantity'
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="toyName" className="block text-gray-700 font-bold mb-2">
+                            Image of Instructor
+                        </label>
+                        <input
+                        {...register("iPhoto", { required: true })}
+                            type="text"
+                            
+                            className="w-full px-3 py-2 border border-gray-300 rounded"
+                            
+                            required
+                            placeholder='Photo URL of Instructor'
                         />
                     </div>
                 </div>
