@@ -51,6 +51,7 @@ const Dashboard = () => {
                         <li><Link to={'/dashboard/studentHome'}>Home</Link></li>
                         <li><Link to={'/dashboard/bookedClasses'}>Booked Classes</Link></li>
                         <li><Link to={'/dashboard/confirmedClasses'}>Confirmed Classes</Link></li>
+                        <li><Link to={'/dashboard/paymentHistory'}>Payment History</Link></li>
                         
                     </ul>
                     }

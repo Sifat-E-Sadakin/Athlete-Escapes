@@ -19,6 +19,7 @@ import StudentHome from "../Components/Student/StudentHome";
 import BookedClasses from "../Components/Student/BookedClasses";
 import Payment from "../Components/Student/Payment";
 import ConfirmedClasses from "../Components/Student/ConfirmedClasses";
+import PaymentHistory from "../Components/Student/PaymentHistory";
 
 
 
@@ -102,7 +103,11 @@ export const router = createBrowserRouter([
         {
           path: '/dashboard/confirmedClasses',
           element: <ConfirmedClasses></ConfirmedClasses>
-        }
+        },
+        {
+          path: '/dashboard/paymentHistory',
+          element: <PaymentHistory></PaymentHistory>
+        },
       ]
       
     },

@@ -8,7 +8,7 @@ const BookedClasses = () => {
 
     let { user } = useContext(userAuth)
     let [axiosSecure] = useAxiosSecure()
-    let { data: bookedClasses = [], refetch, } = useQuery({
+    let { data: bookedClasses = [], } = useQuery({
         queryKey: ['bc'],
         
         queryFn: async () => {
@@ -18,10 +18,10 @@ const BookedClasses = () => {
     })
     console.log(bookedClasses);
     let totalPrice;
-    if (bookedClasses) {
-        totalPrice = bookedClasses.reduce((sum, item) => sum + item.price, 0);
-        console.log(totalPrice);
-    }
+    // if (bookedClasses) {
+    // //     totalPrice = bookedClasses.reduce((sum, item) => sum + item.price, 0);
+    // //     console.log(totalPrice);
+    // // }
 
     let remove = async id => {
        await axiosSecure.delete(`/bookedClasses/${id}?email=${user.email}`)
