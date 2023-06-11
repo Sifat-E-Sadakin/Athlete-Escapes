@@ -5,34 +5,34 @@ import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 const AddClass = () => {
 
-    let {user} = useContext(userAuth);
+    let { user } = useContext(userAuth);
     let [axiosSecure] = useAxiosSecure()
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = async data =>{
+    const onSubmit = async data => {
         console.log(data);
         let price = parseFloat(data.price)
         let seat = parseFloat(data.seats)
-        let newClass = {cName : data.cName,iImage: data.iPhoto, cImage : data.cPhoto, iName : data.iName, email : data.email , seat: data.seats, price, status: data.status, student: 0 }
+        let newClass = { cName: data.cName, iImage: data.iPhoto, cImage: data.cPhoto, iName: data.iName, email: data.email, seat: seat, price, status: data.status, student: 0, description : data.description }
         console.log(newClass);
-        let res= await axiosSecure.post('classes', newClass)
+        let res = await axiosSecure.post('classes', newClass)
         console.log(res.data);
-        
-        
+
+
     }
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)}className="max-w-sm lg:max-w-xl mx-auto bg-purple-200 p-6 rounded shadow-md">
+            <form onSubmit={handleSubmit(onSubmit)} className="max-w-sm lg:max-w-xl mx-auto bg-purple-200 p-6 rounded shadow-md">
                 <div className='lg:flex justify-between '>
                     <div className="mb-4">
                         <label htmlFor="photo" className="block text-gray-700 font-bold mb-2">
                             Class Name
                         </label>
                         <input
-                        {...register("cName", { required: true })}
+                            {...register("cName", { required: true })}
                             type="text"
                             className="w-full px-3  py-2 border border-gray-300 rounded"
-                           
+
                             required
                             placeholder='Name of the class'
                         />
@@ -42,11 +42,11 @@ const AddClass = () => {
                             Image of Class
                         </label>
                         <input
-                        {...register("cPhoto", { required: true })}
+                            {...register("cPhoto", { required: true })}
                             type="text"
-                            
+
                             className="w-full px-3 py-2 border border-gray-300 rounded"
-                            
+
                             required
                             placeholder='Photo URL of the Class'
                         />
@@ -82,7 +82,7 @@ const AddClass = () => {
                 </div>
                 <div className='lg:flex justify-between'>
                     <div className="mb-4">
-                    <label htmlFor="sellerEmail" className="block text-gray-700 font-bold mb-2">
+                        <label htmlFor="sellerEmail" className="block text-gray-700 font-bold mb-2">
                             Class Status
                         </label>
                         <input
@@ -93,11 +93,11 @@ const AddClass = () => {
                             readOnly
                             defaultValue={'pending'}
                         />
-                        
+
                     </div>
                     <div className="mb-4">
                         <label htmlFor="price" className="block text-gray-700 font-bold mb-2">
-                            Price 
+                            Price
                         </label>
                         <input
                             type="number"
@@ -110,31 +110,24 @@ const AddClass = () => {
                     </div>
                 </div>
                 <div className='lg:flex justify-between'>
-                   
+
                     <div className="mb-4">
                         <label htmlFor="quantity" className="block text-gray-700 font-bold mb-2">
                             Available Seats
                         </label>
-                        <input
-                            type="text"
-                            {...register("seats", { required: true })}
-                            className="w-full px-3 py-2 border border-gray-300 rounded"
-                            name='quantity'
-                            required
-                            defaultValue={3}
-                            placeholder='Available Quantity'
-                        />
+                        <input className="w-full px-3 py-2 border border-gray-300 rounded" type="number"  {...register("seats", { required: true })} placeholder='Available Seats' />
+
                     </div>
                     <div className="mb-4">
                         <label htmlFor="toyName" className="block text-gray-700 font-bold mb-2">
                             Image of Instructor
                         </label>
                         <input
-                        {...register("iPhoto", { required: true })}
+                            {...register("iPhoto", { required: true })}
                             type="text"
-                            
+
                             className="w-full px-3 py-2 border border-gray-300 rounded"
-                            
+
                             required
                             placeholder='Photo URL of Instructor'
                         />
@@ -145,6 +138,7 @@ const AddClass = () => {
                         Detail Description
                     </label>
                     <textarea
+                        {...register("description", { required: true })}
                         id="description"
                         required
                         className="w-full px-3 py-2 border border-gray-300 rounded"

@@ -24,6 +24,7 @@ import AllPayments from "../Components/Admin/AllPayments";
 import AdminRoutes from "./AdminRoutes";
 import InstructorsRoutes from "./InstructorsRoutes";
 import NotFound from "../Components/NotFound";
+import UpdateClasses from "../Components/Instructor/UpdateClasses";
 
 
 
@@ -92,6 +93,10 @@ export const router = createBrowserRouter([
         {
           path: '/dashboard/instructorClasses',
           element:<InstructorsRoutes> <InstructorClasses></InstructorClasses></InstructorsRoutes>
+        },
+        {
+          path: '/dashboard/updateClass/:id',
+          element:<InstructorsRoutes><UpdateClasses></UpdateClasses></InstructorsRoutes>
         },
 
         // student routes /////////////////////////////////////////////////

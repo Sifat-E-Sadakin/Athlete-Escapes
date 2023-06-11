@@ -3,6 +3,7 @@ import { userAuth } from '../Providers/UserProvider';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import Marquee from 'react-fast-marquee';
+import { Hinge, Roll, Zoom } from 'react-awesome-reveal';
 
 const PopularInstructors = () => {
 
@@ -29,13 +30,15 @@ const PopularInstructors = () => {
                <Marquee>
                {
                     topSix.map(item =>
-                        <div className="carousel carousel-end ">
+                       
+                         <div className="carousel carousel-end ">
                             <div className="carousel-item w-64 max-w-[256px]">
                                 <img src={item.iImage} alt="Drink" />
                             </div>
                             
 
                         </div>
+                       
                     )
                 }
                </Marquee>

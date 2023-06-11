@@ -2,17 +2,23 @@ import React, { useContext } from 'react';
 import { userAuth } from '../../Providers/UserProvider';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const InstructorClasses = () => {
 
     let { user } = useContext(userAuth);
     let [axiosSecure] = useAxiosSecure()
 
-    const { data: instructorClasses = [], refetch } = useQuery({
+    let [instructorClasses, setInstructorClass] = useState([])
+
+    const { data: Classes = [], refetch } = useQuery({
         queryKey: ['ic'],
         queryFn: async () => {
             let res = await axiosSecure(`/instructorClass?email=${user?.email}`)
+            setInstructorClass(res.data)
             return res.data
+           
         },
     })
     console.log(instructorClasses);
@@ -39,7 +45,7 @@ const InstructorClasses = () => {
                             <th>{item.status}</th>
                             <td>{item.feedback? item.feedback: 'Waiting For Feedback'}</td>
                             <td>{item.student}</td>
-                            <td className='btn btn-ghost btn-xs'><button>Update</button></td>
+                            <Link to={`/dashboard/updateClass/${item._id}`}><td className='btn btn-ghost btn-xs'><button>Update</button></td></Link>
                         </tr>)
                        }
                   

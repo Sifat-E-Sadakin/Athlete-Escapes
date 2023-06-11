@@ -1,10 +1,12 @@
 import React from 'react';
+import { Zoom } from 'react-awesome-reveal';
 
 
 const Sponsors = () => {
     return (
         <div className='container mx-auto'>
             <h1 className='text-4xl text-center font-semibold mt-32 mb-10'>Athlete Escapes Sponsor's</h1>
+            <Zoom>
             <div data-aos="zoom-in" className='grid grid-cols-2 md:flex justify-around '>
                 <div className='md:w-36 w-24'>
                     <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-1024.png" alt="" />
@@ -27,6 +29,7 @@ const Sponsors = () => {
                     <h1 className='text-center text-xl font-medium'>TailWind</h1>
                 </div>
             </div>
+            </Zoom>
             
         </div>
     );
