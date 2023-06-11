@@ -36,7 +36,7 @@ const UserProvider = ({children}) => {
             console.log(loading);
 
             if(getUser){
-                fetch(`http://localhost:3000/jwt`,{
+                fetch(`https://assignment-12-server-ochre-rho.vercel.app/jwt`,{
                 method: 'POST',
                 headers : {
                     'content-type' : 'application/json'

@@ -1,15 +1,29 @@
 import React, { useContext } from 'react';
 import { userAuth } from './UserProvider';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigation } from 'react-router-dom';
+import { Circles } from 'react-loader-spinner';
 
 const PrivateRoutes = ({children}) => {
 
     let {user, loading} = useContext(userAuth);
+    const navigation = useNavigation();
 
     let location = useLocation();
 
+
+
     if(loading){
-        return <p>lllllllllllll</p>
+        return  <div className='spinner'>
+        {navigation.state == 'loading' ? <Triangle
+            height="300"
+            width="300"
+            color="#000000"
+            ariaLabel="triangle-loading"
+            wrapperStyle={{}}
+            wrapperClassName=""
+            visible={true}
+        /> : <></>}
+    </div>
     }
 
     if(user){

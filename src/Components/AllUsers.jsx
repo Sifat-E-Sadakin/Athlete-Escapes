@@ -14,7 +14,7 @@ const AllUsers = () => {
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            let res = await axiosSecure('http://localhost:3000/users')
+            let res = await axiosSecure('https://assignment-12-server-ochre-rho.vercel.app/users')
             return res.data
         },
     })

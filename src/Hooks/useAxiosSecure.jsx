@@ -11,7 +11,7 @@ const useAxiosSecure = () => {
   const navigate = useNavigate(); 
 
   const axiosSecure = axios.create({
-    baseURL: 'http://localhost:3000', 
+    baseURL: 'https://assignment-12-server-ochre-rho.vercel.app', 
   });
 
   useEffect(() => {

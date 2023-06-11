@@ -25,7 +25,7 @@ const SignUp = () => {
                 updateUser(data.name, data.photo)
                 let newUser = { name: data.name, email: user.email, photo: data.photo, role: 'student' }
                 navigate('/')
-                fetch('http://localhost:3000/users', {
+                fetch('https://assignment-12-server-ochre-rho.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -49,7 +49,7 @@ const SignUp = () => {
                 navigate('/')
                 console.log(newUser.user.displayName);
                 let gUser = { name: newUser.user.displayName, email: newUser.user.email, photo: newUser.user.photoURL, role: 'student' }
-                fetch('http://localhost:3000/users', {
+                fetch('https://assignment-12-server-ochre-rho.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

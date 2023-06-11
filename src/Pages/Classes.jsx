@@ -12,14 +12,18 @@ const Classes = () => {
     let [axiosSecure] = useAxiosSecure()
     const [disabledButtons, setDisabledButtons] = useState([]);
 
-    const { data: approvedClasses = [], refetch } = useQuery({
+    const { data: approvedClasses = [], refetch, status } = useQuery({
         queryKey: ['ac'],
         queryFn: async () => {
-            let res = await axiosSecure('/classes/approved')
+            let res = await axiosSecure.get('/classes/approved')
             return res.data
 
         },
     })
+    
+    if(status=='loading'){
+        console.log('loading');
+    }
 
 
     let { isAdmin } = useAdmin()

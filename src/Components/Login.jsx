@@ -45,7 +45,7 @@ const Login = () => {
                 navigate('/')
                 console.log(newUser.user.displayName);
                 let gUser = { name: newUser.user.displayName, email: newUser.user.email, photo: newUser.user.photoURL, role: 'student' }
-                fetch('http://localhost:3000/users', {
+                fetch('https://assignment-12-server-ochre-rho.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

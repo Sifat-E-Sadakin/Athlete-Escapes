@@ -13,7 +13,7 @@ import bg4 from '../../public/BG/5678551.jpg'
 
 const Banner = () => {
     return (
-        <div className='md:relative md:bottom-[70px]'>
+        <div className='md:relative md:bottom-20'>
             <Swiper
                 pagination={{
                     type: "fraction",
