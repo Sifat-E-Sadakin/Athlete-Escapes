@@ -1,65 +1,78 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { userAuth } from '../Providers/UserProvider';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { FaGoogle } from 'react-icons/fa';
 
 const SignUp = () => {
 
-    let { createUser, updateUser , googlePopUp} = useContext(userAuth);
+    let { createUser, updateUser, googlePopUp } = useContext(userAuth);
 
     let navigate = useNavigate()
+    let [err, setErr] = useState(null)
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
+
+        setErr(null)
+
         console.log(data);
         createUser(data.email, data.password)
-        .then(userCredential=>{
-            let user = userCredential.user;
-            console.log(user);
-            updateUser(data.name, data.photo)
-            let newUser = {name: data.name, email: user.email, photo:data.photo, role: 'student'}
-            navigate('/')
-            fetch('http://localhost:3000/users',{
-                method: 'POST',
-                headers: {
-                    'content-type' : 'application/json'
-                },
-                body: JSON.stringify(newUser)
+            .then(userCredential => {
+                let user = userCredential.user;
+                console.log(user);
+                updateUser(data.name, data.photo)
+                let newUser = { name: data.name, email: user.email, photo: data.photo, role: 'student' }
+                navigate('/')
+                fetch('http://localhost:3000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(newUser)
+                })
+                    .then(res => res.json())
+                    .then(data => console.log(data))
             })
-            .then(res => res.json())
-            .then(data => console.log(data))
-        })
-        .catch(err=>{
-            console.log(err.message);
-        })
+            .catch(err => {
+                console.log(err.message);
+                setErr(err.message);
+            })
     };
+    console.log(errors);
 
-    let google = ()=>{
+    let google = () => {
+        setErr(null)
         googlePopUp()
-        .then(newUser=>{
-            navigate('/')
-            console.log(newUser.user.displayName);
-            let gUser = {name: newUser.user.displayName, email: newUser.user.email, photo: newUser.user.photoURL, role: 'student'}
-            fetch('http://localhost:3000/users',{
-                method: 'POST',
-                headers: {
-                    'content-type' : 'application/json'
-                },
-                body: JSON.stringify(gUser)
-            })
-            .then(res => res.json())
-            .then(data => console.log(data))
+            .then(newUser => {
+                navigate('/')
+                console.log(newUser.user.displayName);
+                let gUser = { name: newUser.user.displayName, email: newUser.user.email, photo: newUser.user.photoURL, role: 'student' }
+                fetch('http://localhost:3000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(gUser)
+                })
+                    .then(res => res.json())
+                    .then(data => console.log(data))
 
-        })
+            })
+            .catch(err=>{
+                setErr(err)
+            })
+            
     }
 
     return (
         <div>
-            <div className="hero min-h-screen bg-base-200">
+            <div className="hero min-h-screen ">
                 <div className="hero-content flex-col lg:flex-row-reverse">
-                    <div className="text-center lg:text-left">
-                        <h1 className="text-5xl font-bold">Sign Up now!</h1>
-                        <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                <div className="text-center lg:text-left card flex-shrink-0 w-full max-w-sm space-y-2 ">
+                        <h1 className="text-5xl font-bold">Sign Up !!!</h1>
+                        <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?w=740&t=st=1686458373~exp=1686458973~hmac=c9d39d2fdaa53a1ad831f78f3a3b13008039939a9d2b0d6577cefe0b344df4a4" alt="" />
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)} className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                         <div className="card-body">
@@ -85,24 +98,39 @@ const SignUp = () => {
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Password</span>
+                                    <span className="label-text">Create Password</span>
                                 </label>
-                                <input {...register("password", { required: true })} type="text" placeholder="Password" className="input input-bordered" />
+                                <input {...register("password", { required: true, pattern: /[A-Z]+[!@#$%^&*]/ })} type="text" placeholder="Password" className="input input-bordered" />
                             </div>
-                            <div className="form-control">
+                            {errors.password && errors.password.type === 'pattern' && (
+                                <span className="text-error">
+                                    Password should have at least 6 characters. Having a Capital latter and special character
+                                </span>
+                            )}
+                            {/* <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Confirm Password</span>
                                 </label>
                                 <input type="text" placeholder="Confirm password" className="input input-bordered" />
 
+                            </div> */}
+                            <div className='text-sm my-2'>
+                                Already have account, Please <Link className='font-bold' to={'/login'}>login</Link>
                             </div>
+                            <div>
+                                {
+                                    err && <span className='text-error'>{err}</span>
+                                }
+                            </div>
+                           
                             <div className="form-control mt-6">
                                 <input type="submit" value={'Sign Up '} className='btn btn-primary' />
                             </div>
+                            <button onClick={google} className='btn btn-primary btn-outline my-2'><FaGoogle></FaGoogle> Sign Up with Google</button>
                         </div>
-                        <button onClick={google} className='btn'>G</button>
+                        
                     </form>
-                    
+
                 </div>
             </div>
 
