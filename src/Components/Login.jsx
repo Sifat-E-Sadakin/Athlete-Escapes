@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { userAuth } from '../Providers/UserProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaGoogle } from 'react-icons/fa';
+import { FaEyeSlash, FaGoogle } from 'react-icons/fa';
 
 const Login = () => {
 
@@ -89,8 +89,8 @@ const Login = () => {
 
 
                             </div>
-                            <p className='btn btn-ghost btn-xs' onClick={togglePasswordVisibility}>
-                                {showPassword ? 'Hide' : 'Show'} Password
+                            <p className='relative' onClick={togglePasswordVisibility}>
+                                <FaEyeSlash className='absolute right-2 bottom-14 cursor-pointer'></FaEyeSlash>
                             </p>
                             <div className='text-sm my-2'>
                                 Are You In Athlete Escapes, Please <Link className='font-bold' to={'/signUp'}>Sign Up</Link>

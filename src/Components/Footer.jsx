@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaFacebook, FaGithub, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
     return (
@@ -8,7 +9,7 @@ const Footer = () => {
                 <div className='container mx-auto  grid grid-cols-2 gap-5 p-2 md:flex md:justify-between'>
                     <div>
                         <h2 className='text-2xl py-2 font-semibold'>Athlete Escapes</h2>
-                        <p className='text-sm   py-2'>Experience pure exhilaration at Athlete Escapes!</p>
+                        <p className='text-sm   py-2'>Join Athlete Escapes to Became a Champion!</p>
                         <div>
                             <img src={''} alt="" />
                         </div>
@@ -46,11 +47,11 @@ const Footer = () => {
                         <p className='text-sm my-2'>Near Your Home, 24/7</p>
                         <p className='text-sm my-2'>+8801791507027</p>
                         <p className='text-sm my-2'>+8801644997904</p>
-                        <div className='space-x-3'>
-                            {/* <a href="https://www.facebook.com/profile.php?id=100007217809134" target='_blank'> <Facebook></Facebook></a>
-                            <a href="https://www.instagram.com/sifat10/" target='_blank'> <Instagram></Instagram></a>
-                            <a href="https://github.com/Sifat-E-Sadakin" target='_blank'> <GitHub></GitHub></a> */}
-                        </div>
+                        <div className='space-x-5 flex'>
+                        <a href="https://www.facebook.com/profile.php?id=100007217809134" target='_blank'> <FaFacebook></FaFacebook></a> 
+                        <a href="https://www.instagram.com/sifat10/" target='_blank'> <FaInstagram></FaInstagram></a> 
+                        <a href="https://github.com/Sifat-E-Sadakin" target='_blank'> <FaGithub></FaGithub></a> 
+                    </div>
                         <p className='text-sm my-2'>sifat.e.sadakin@g.bracu.ac.bd</p>
 
                     </div>

@@ -9,6 +9,7 @@ import bg1 from '../../public/BG/3319458.jpg'
 import bg2 from '../../public/BG/3318154.jpg'
 import bg3 from '../../public/BG/5678546.jpg'
 import bg4 from '../../public/BG/5678551.jpg'
+import LazyLoad from 'react-lazy-load';
 
 
 const Banner = () => {
@@ -22,7 +23,8 @@ const Banner = () => {
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
             >
-                <SwiperSlide className='max-h-[600px]'>
+              <LazyLoad>
+              <SwiperSlide className='max-h-[600px]'>
                     <img src={bg3} alt="" />
                 </SwiperSlide>
                 <SwiperSlide className='max-h-[600px]'>
@@ -34,6 +36,7 @@ const Banner = () => {
                 <SwiperSlide className='max-h-[600px]'>
                     <img src={bg2} alt="" />
                 </SwiperSlide>
+              </LazyLoad>
                
             </Swiper>
 

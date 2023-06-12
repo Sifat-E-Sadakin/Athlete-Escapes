@@ -7,6 +7,8 @@ import { Helmet } from 'react-helmet';
 
 const AddClass = () => {
 
+    
+
     let { user } = useContext(userAuth);
     let [axiosSecure] = useAxiosSecure()
 
@@ -17,7 +19,7 @@ const AddClass = () => {
         let seat = parseFloat(data.seats)
         let newClass = { cName: data.cName, iImage: data.iPhoto, cImage: data.cPhoto, iName: data.iName, email: data.email, seat: seat, price, status: data.status, student: 0, description : data.description }
         console.log(newClass);
-        let res = await axiosSecure.post('classes', newClass)
+        let res = await axiosSecure.post('/classes', newClass)
         .then(res=>{
             Swal.fire({
                 position: '',

@@ -17,6 +17,11 @@ const SignUp = () => {
 
         setErr(null)
 
+        if(data.password != data.cPassword){
+            setErr('Password Did not match')
+            return 
+        }
+
         console.log(data);
         createUser(data.email, data.password)
             .then(userCredential => {
@@ -100,20 +105,20 @@ const SignUp = () => {
                                 <label className="label">
                                     <span className="label-text">Create Password</span>
                                 </label>
-                                <input {...register("password", { required: true, pattern: /[A-Z]+[!@#$%^&*]/ })} type="text" placeholder="Password" className="input input-bordered" />
+                                <input {...register("password", { required: true, pattern: /[A-Z]+[!@#$%^&*]/ })} type="password" placeholder="Password" className="input input-bordered" />
                             </div>
                             {errors.password && errors.password.type === 'pattern' && (
                                 <span className="text-error">
                                     Password should have at least 6 characters. Having a Capital latter and special character
                                 </span>
                             )}
-                            {/* <div className="form-control">
+                            <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Confirm Password</span>
                                 </label>
-                                <input type="text" placeholder="Confirm password" className="input input-bordered" />
+                                <input {...register("cPassword", { required: true })} type="password" placeholder="Confirm password" className="input input-bordered" />
 
-                            </div> */}
+                            </div>
                             <div className='text-sm my-2'>
                                 Already have account, Please <Link className='font-bold' to={'/login'}>login</Link>
                             </div>
