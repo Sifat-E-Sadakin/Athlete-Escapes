@@ -5,6 +5,7 @@ import { userAuth } from '../../Providers/UserProvider';
 import moment from 'moment/moment';
 import { Navigate, useNavigate } from 'react-router-dom';
 
+
 const CheckOut = ({ fees, id, bookedClasses, fId }) => {
 
   console.log(bookedClasses);
@@ -14,7 +15,10 @@ const CheckOut = ({ fees, id, bookedClasses, fId }) => {
   let [axiosSecure] = useAxiosSecure()
   const elements = useElements();
   let [confirmedClasses, setConfirmedClasses] = useState()
+  let [err, setErr] = useState(null)
+  let [success, setSuccess] = useState(null)
   const [clientSecret, setClientSecret] = useState("");
+  const [isButtonDisabled, setDisabledButtons] = useState(false);
   let go = useNavigate();
   // console.log(fees);
   useEffect(() => {
@@ -27,6 +31,9 @@ const CheckOut = ({ fees, id, bookedClasses, fId }) => {
   }, [fees]);
 
   const handleSubmit = async (event) => {
+    setErr(null)
+    setSuccess(null)
+    setDisabledButtons(true)
     // Block native form submission.
     event.preventDefault();
 
@@ -57,9 +64,10 @@ const CheckOut = ({ fees, id, bookedClasses, fId }) => {
       console.log('[PaymentMethod]', paymentMethod);
     }
 
-    const { paymentIntent, error: err } = await stripe.confirmCardPayment(
+    const { paymentIntent, error: errr } = await stripe.confirmCardPayment(
       clientSecret,
       {
+        
         payment_method: {
           card: card,
           billing_details: {
@@ -71,10 +79,14 @@ const CheckOut = ({ fees, id, bookedClasses, fId }) => {
 
     );
 
-    if (err) {
-      console.log(err);
+    if (errr) {
+      console.log(errr);
+      setErr(errr.message)
+      setDisabledButtons(false)
     }
     if (paymentIntent) {
+      setSuccess(paymentIntent)
+      setDisabledButtons(false)
       // let getBookedClasses= await   axiosSecure(`/bookedClasses?email=${user.email}`)
 
       // let bookedClasses =  getBookedClasses.data;
@@ -109,7 +121,7 @@ const CheckOut = ({ fees, id, bookedClasses, fId }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <CardElement
+        <CardElement className='input input-bordered input-primary'
           options={{
             style: {
               base: {
@@ -125,7 +137,9 @@ const CheckOut = ({ fees, id, bookedClasses, fId }) => {
             },
           }}
         />
-        <button type="submit" disabled={!stripe}>
+        {err && <p className='text-warning'>{err}</p>}
+        {success && <p className='text-success'>Payment Success Trx Id : {success.id}</p>}
+        <button className='btn btn-primary  btn-md my-7'  type="submit" disabled={isButtonDisabled}>
           Pay
         </button>
       </form>

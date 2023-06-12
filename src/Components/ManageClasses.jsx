@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet';
 
 const ManageClasses = () => {
 
@@ -59,6 +61,13 @@ const ManageClasses = () => {
         axiosSecure.put(`/classes/feedback/${id}`, finalFeedback)
             .then(data => {
                 console.log(data.data);
+                Swal.fire({
+                    position: '',
+                    icon: 'success',
+                    title: `Feedback sent to Successfully`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
             })
     }
 
@@ -67,6 +76,10 @@ const ManageClasses = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Manage Classes | Athlete Escapes</title>
+            </Helmet>
+              <h1 className='text-center text-3xl font-semibold my-10'>Manage Classes</h1>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

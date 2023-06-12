@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Navbar from '../Components/Navbar';
-import { Link, Outlet, useNavigation } from 'react-router-dom';
+import { Link, NavLink, Navigate, Outlet, useNavigate, useNavigation } from 'react-router-dom';
 import useAdmin from '../Hooks/useAdmin';
 import useInstructor from '../Hooks/useInstructor';
 import { Triangle } from 'react-loader-spinner';
+import AdminHome from '../Components/Admin/AdminHome';
+import Footer from '../Components/Footer';
+import { FaAngleDoubleRight, FaBook, FaBookmark, FaHistory, FaHome, FaList, FaPlug, FaPlus, FaUserAlt, FaUsers, FaWallet } from 'react-icons/fa';
+import { userAuth } from '../Providers/UserProvider';
+import { Helmet } from 'react-helmet';
 
 const Dashboard = () => {
 
@@ -12,15 +17,24 @@ const Dashboard = () => {
     const navigation = useNavigation();
     // console.log(isInstructor.isInstructor);
     // console.log(isAdmin.isAdmin);
+    let go = useNavigate()
+    let {user} = useContext(userAuth)
+
 
     let CheckAdmin = isAdmin?.isAdmin;
+
     let checkInstructor = isInstructor?.isInstructor;
+
+   
     return (
         <div className=''>
+            <Helmet>
+                <title>{user.displayName} | Athlete Escapes</title>
+            </Helmet>
             <Navbar></Navbar>
             <div className="drawer lg:drawer-open ">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content mt-20">
+                <div className=" drawer-content mt-20">
                     {/* Page content here */}
                     <div className='spinner'>
                         {navigation.state == 'loading' ? <Triangle
@@ -33,20 +47,24 @@ const Dashboard = () => {
                             visible={true}
                         /> : <></>}
                     </div>
+                    {CheckAdmin && <Navigate to={'/dashboard/adminHome'}></Navigate>}
+                    {checkInstructor && <Navigate to={'/dashboard/instructorHome'}></Navigate>}
+                    {!CheckAdmin && !checkInstructor ? <Navigate to={'/dashboard/studentHome'}></Navigate>:<></> }
                     <Outlet></Outlet>
+                    
                     <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
 
                 </div>
-                <div className="drawer-side">
+                <div className="drawer-side ">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     {
                         CheckAdmin ?
-                            <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
+                            <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content ">
                                 {/* Sidebar content here */}
-                                <li><Link to={'/dashboard/adminHome'}>Admin Home</Link></li>
-                                <li><Link to={'/dashboard/allUsers'}>All Users</Link></li>
-                                <li><Link to={'/dashboard/manageClasses'}>Manage Classes</Link></li>
-                                <li><Link to={'/dashboard/allPayments'}>ALL Payments</Link></li>
+                                <p className='mt-14 flex gap-3 items-center'> <FaHome></FaHome><NavLink to={'/dashboard/adminHome'}>Admin Home</NavLink></p>
+                                <p className='mt-3 flex gap-3 items-center'> <FaUsers></FaUsers><NavLink to={'/dashboard/allUsers'}>All Users</NavLink></p>
+                                <p className='mt-3 flex gap-3 items-center'> <FaAngleDoubleRight></FaAngleDoubleRight> <NavLink to={'/dashboard/manageClasses'}>Manage Classes</NavLink></p>
+                                <p className='mt-3 flex gap-3 items-center'> <FaWallet></FaWallet> <NavLink to={'/dashboard/allPayments'}>ALL Payments</NavLink></p>
 
 
 
@@ -54,23 +72,24 @@ const Dashboard = () => {
                             checkInstructor ?
                                 <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
                                     {/* Sidebar content here */}
-                                    <li><Link to={'/dashboard/instructorHome'}>Instructor Home</Link></li>
-                                    <li><Link to={'/dashboard/addClass'}>Add Class</Link></li>
-                                    <li><Link to={'/dashboard/instructorClasses'}>My Classes</Link></li>
+                                    <p className='mt-14 flex gap-3 items-center'> <FaHome></FaHome><NavLink to={'/dashboard/instructorHome'}>Instructor Home</NavLink></p>
+                                    <p className='mt-3 flex gap-3 items-center'> <FaPlus></FaPlus><NavLink to={'/dashboard/addClass'}>Add Class</NavLink></p>
+                                    <p className='mt-3 flex gap-3 items-center'> <FaList></FaList><NavLink to={'/dashboard/instructorClasses'}>My Classes</NavLink></p>
                                 </ul>
                                 :
                                 <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
                                     {/* Sidebar content here */}
-                                    <li><Link to={'/dashboard/studentHome'}>Home</Link></li>
-                                    <li><Link to={'/dashboard/bookedClasses'}>Booked Classes</Link></li>
-                                    <li><Link to={'/dashboard/confirmedClasses'}>Confirmed Classes</Link></li>
-                                    <li><Link to={'/dashboard/paymentHistory'}>Payment History</Link></li>
+                                    <p className='mt-14 flex gap-3 items-center'> <FaHome></FaHome><NavLink to={'/dashboard/studentHome'}>Home</NavLink></p>
+                                    <p className='mt-3 flex gap-3 items-center'> <FaBookmark></FaBookmark><NavLink to={'/dashboard/bookedClasses'}>Booked Classes</NavLink></p>
+                                    <p className='mt-3 flex gap-3 items-center'> <FaWallet></FaWallet><NavLink to={'/dashboard/confirmedClasses'}>Confirmed Classes</NavLink></p>
+                                    <p className='mt-3 flex gap-3 items-center'> <FaHistory></FaHistory><NavLink to={'/dashboard/paymentHistory'}>Payment History</NavLink></p>
 
                                 </ul>
                     }
 
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 };

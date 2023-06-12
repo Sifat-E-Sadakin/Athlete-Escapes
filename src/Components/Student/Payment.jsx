@@ -7,6 +7,7 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { userAuth } from '../../Providers/UserProvider';
 import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT);
 
@@ -41,8 +42,11 @@ const Payment = () => {
     
 
     return (
-        <div>
-            payment
+        <div className='container mx-auto'>
+            <Helmet>
+                <title>Payment | Athlete Escapes</title>
+            </Helmet>
+            <h1 className='text-center text-3xl font-semibold my-10'>Confirm Yor Payment</h1>
             <Elements stripe={stripePromise}>
                <CheckOut fId={fId} bookedClasses={bookedClassesPaid} id={id} fees={totalPrice}></CheckOut>
             </Elements>

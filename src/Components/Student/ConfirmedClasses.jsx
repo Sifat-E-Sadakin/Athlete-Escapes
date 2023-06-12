@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { userAuth } from '../../Providers/UserProvider';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet';
 
 const ConfirmedClasses = () => {
 
@@ -19,6 +20,10 @@ const ConfirmedClasses = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Confirmed | Athlete Escapes</title>
+            </Helmet>
+              <h1 className='text-center text-3xl font-semibold my-10'>List Of Confirmed Classes</h1>
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
                     {/* head */}

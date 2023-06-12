@@ -5,6 +5,8 @@ import { userAuth } from '../Providers/UserProvider';
 import { Link } from 'react-router-dom';
 import useAdmin from '../Hooks/useAdmin';
 import useInstructor from '../Hooks/useInstructor';
+import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet';
 
 let disable = []
 const Classes = () => {
@@ -50,7 +52,15 @@ const Classes = () => {
         console.log(studentClass);
         axiosSecure.post('/addClass', studentClass)
             .then(data => {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: `${info.cName} is successfully booked, please confirm your payment`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
                 console.log(data.data);
+                
             })
 
         if (info.seat <= 0) {
@@ -70,8 +80,11 @@ const Classes = () => {
 
     return (
         <div className='container mx-auto'>
-            <h1 className='text-center text-3xl font-semibold my-10'>Available Classes</h1>
-            <div className='grid md:grid-cols-3'>
+            <Helmet>
+                <title>Classes | Athlete Escapes</title>
+            </Helmet>
+            <h1 className='text-center text-3xl  font-semibold my-10'>Available Classes</h1>
+            <div className='grid md:grid-cols-3 gap-12'>
                 {
                     approvedClasses.map(item =>
                         <div>

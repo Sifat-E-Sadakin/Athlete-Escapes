@@ -1,6 +1,7 @@
 import React from 'react';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import { Helmet } from 'react-helmet';
 
 const Instructors = () => {
 
@@ -18,6 +19,9 @@ const Instructors = () => {
     
     return (
         <div className='container mx-auto'>
+            <Helmet>
+                <title>Instructors | Athlete Escapes</title>
+            </Helmet>
             <h1 className='text-3xl font-semibold my-10 text-center'>Respective Instructors</h1>
 
             <div className='grid md:grid-cols-3'>

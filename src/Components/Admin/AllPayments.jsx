@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { userAuth } from '../../Providers/UserProvider';
+import { Helmet } from 'react-helmet';
 
 const AllPayments = () => {
 
@@ -23,6 +24,9 @@ const AllPayments = () => {
     console.log(paymentHistory);
     return (
         <div className='container mx-auto'>
+            <Helmet>
+                <title>All Payments | Athlete Escapes</title>
+            </Helmet>
             <h1 className='text-center text-3xl font-semibold my-10'>Payment History</h1>
 
             <div className="overflow-x-auto">

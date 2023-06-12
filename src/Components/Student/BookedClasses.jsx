@@ -5,6 +5,9 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
+import '../Student/Styles/payment.css'
+import { Helmet } from 'react-helmet';
 
 const BookedClasses = () => {
 
@@ -12,7 +15,7 @@ const BookedClasses = () => {
     let [axiosSecure] = useAxiosSecure()
 
     let [bookedClasses, setBookedClasses] = useState([])
-    let { data: getData=[],  refetch } = useQuery({
+    let { data: getData = [], refetch } = useQuery({
         queryKey: ['bc'],
         enabled: !loading,
         queryFn: async () => {
@@ -27,13 +30,32 @@ const BookedClasses = () => {
     // //     totalPrice = bookedClasses.reduce((sum, item) => sum + item.price, 0);
     // //     console.log(totalPrice);
     // // }
-   
+
     let remove = async id => {
-       await axiosSecure.delete(`/bookedClasses/${id}?email=${user.email}`)
-            .then(data => {
-                refetch()
-                console.log(data.data);
-            })
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/bookedClasses/${id}?email=${user.email}`)
+                    .then(data => {
+                        refetch()
+                        console.log(data.data);
+                    })
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            }
+        })
+
+
 
     }
     // window.location.reload();
@@ -43,8 +65,11 @@ const BookedClasses = () => {
     // },[])
     return (
         <div>
-            
-            Booked Class
+            <Helmet>
+                <title>Booked | Athlete Escapes</title>
+            </Helmet>
+
+            <h1 className='text-center text-3xl font-semibold my-10'>List Of Booked Classes</h1>
 
             <p>Total Fees : {totalPrice} </p>
 
@@ -63,7 +88,7 @@ const BookedClasses = () => {
                     </thead>
                     <tbody>
 
-                        { 
+                        {
                             bookedClasses.map((item, index) => <tr>
                                 <th>{index + 1}</th>
                                 <td>{item.cName}</td>

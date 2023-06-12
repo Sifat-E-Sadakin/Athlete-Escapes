@@ -4,6 +4,7 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 
 const InstructorClasses = () => {
 
@@ -25,6 +26,9 @@ const InstructorClasses = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>My Classes | Athlete Escapes</title>
+            </Helmet>
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
                     {/* head */}

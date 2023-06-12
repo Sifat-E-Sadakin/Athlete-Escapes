@@ -5,6 +5,7 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import Swal from 'sweetalert2';
 
 const UpdateClasses = () => {
 
@@ -49,11 +50,21 @@ const UpdateClasses = () => {
         console.log(newClass);
 
            let res = await axiosSecure.put(`/updateClass/${id}`, newClass)
+           .then(res=>{
+            Swal.fire({
+                position: '',
+                icon: 'success',
+                title: `${instructorClasses.cName} has been successfully Updated`,
+                showConfirmButton: false,
+                timer: 1500
+              })
+           })
       console.log(res.data);
 
     }
     return (
         <div>
+              <h1 className='text-center text-3xl font-semibold my-10'>Update Class</h1>
             <form onSubmit={handelSubmit}className="max-w-sm lg:max-w-xl mx-auto bg-purple-200 p-6 rounded shadow-md">
                 <div className='lg:flex justify-between '>
                    
@@ -107,7 +118,7 @@ const UpdateClasses = () => {
                     type="submit"
                     className="btn btn-primary"
                 >
-                    Add item
+                    Update Class
                 </button>
             </form>
 

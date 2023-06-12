@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { data } from 'autoprefixer';
+import { Helmet } from 'react-helmet';
 
 let disabledButtons=[]
 
@@ -64,6 +65,10 @@ const AllUsers = () => {
 
     return (
         <div>
+             <Helmet>
+                <title>All Users | Athlete Escapes</title>
+            </Helmet>
+              <h1 className='text-center text-3xl font-semibold my-10'>List Of All Users</h1>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

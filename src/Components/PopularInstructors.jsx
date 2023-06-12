@@ -24,7 +24,7 @@ const PopularInstructors = () => {
     console.log(topSix);
     return (
         <div className='container mx-auto'>
-            <h1 className='text-center text-3xl font-semibold my-10'>Most Popular Instructors</h1>
+            <h1 className='text-center text-3xl font-semibold  my-20'>Most Popular Instructors</h1>
 
             <div className=''>
                <Marquee>

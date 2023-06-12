@@ -2,13 +2,15 @@ import React, { useContext } from 'react';
 import { userAuth } from '../Providers/UserProvider';
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet';
 
 const AddClass = () => {
 
     let { user } = useContext(userAuth);
     let [axiosSecure] = useAxiosSecure()
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
     const onSubmit = async data => {
         console.log(data);
         let price = parseFloat(data.price)
@@ -16,12 +18,26 @@ const AddClass = () => {
         let newClass = { cName: data.cName, iImage: data.iPhoto, cImage: data.cPhoto, iName: data.iName, email: data.email, seat: seat, price, status: data.status, student: 0, description : data.description }
         console.log(newClass);
         let res = await axiosSecure.post('classes', newClass)
+        .then(res=>{
+            Swal.fire({
+                position: '',
+                icon: 'success',
+                title: `${data.cName} has been successfully added, Please for Approval From Admin`,
+                showConfirmButton: false,
+                timer: 1500
+              })
+              reset()
+        })
         console.log(res.data);
 
 
     }
     return (
         <div>
+            <Helmet>
+                <title>Add class | Athlete Escapes</title>
+            </Helmet>
+              <h1 className='text-center text-3xl font-semibold my-10'>Add New Class</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="max-w-sm lg:max-w-xl mx-auto bg-purple-200 p-6 rounded shadow-md">
                 <div className='lg:flex justify-between '>
                     <div className="mb-4">
@@ -150,7 +166,7 @@ const AddClass = () => {
                     type="submit"
                     className="btn btn-primary"
                 >
-                    Add item
+                    Add Class
                 </button>
             </form>
         </div>

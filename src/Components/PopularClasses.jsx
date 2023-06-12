@@ -34,7 +34,11 @@ const PopularClasses = () => {
                                 <figure><img src={item.cImage} alt="Shoes" /></figure>
                                 <div className="card-body">
                                     <h2 className="card-title">{item.cName}</h2>
-                                    <p>{item.iName}</p>
+                                    <p>{item.iName} <br />
+                                    <span className='my-2'>Total Student : {item.student} </span>
+                                    
+                                    </p>
+                                    
                                     <div className="card-actions justify-end">
                                         <Link to={'/classes'}><button className="btn btn-primary">Buy Now</button></Link>
                                     </div>

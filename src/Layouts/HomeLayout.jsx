@@ -14,8 +14,8 @@ const HomeLayout = () => {
             <Navbar></Navbar>
             <div className='spinner'>
                 {navigation.state == 'loading' ? <Triangle
-                    height="300"
-                    width="300"
+                    height="100"
+                    width="100"
                     color="#000000"
                     ariaLabel="triangle-loading"
                     wrapperStyle={{}}
